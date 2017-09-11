@@ -1,0 +1,45 @@
+body {
+    background-color: #baf2b5;
+    margin: 0 auto;
+    width: 80%;
+}
+
+h1 {
+/*    font-size: 1.5rem;*/
+    text-align: center;
+    color: #7a7062;
+    font-weight: 600;
+    text-shadow: 2px 2px 2px white
+}
+
+textarea {
+    margin: 10px auto;
+    border-style: groove;
+    border-radius: 8px;
+    float: left;
+}
+
+input[type=submit] {
+    border-style: groove;
+    margin: 15px 0px 0px 10px;
+    border-radius: 5px;
+    background-color: #10C716;
+    color: white;
+    font-weight: 700;
+}
+
+.firstMessage, .replyMessage {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.replyMessage {
+    float: right;
+}
+
+.firstMessage textarea {
+   border-color: #665e52;  
+}
+.replyMessage textarea {
+   border-color: #b2a48f;
+}
