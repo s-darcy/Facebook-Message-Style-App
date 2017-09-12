@@ -5,31 +5,35 @@ body {
 }
 
 h1 {
-/*    font-size: 1.5rem;*/
     text-align: center;
-    color: #7a7062;
+    color: #0E871A;
     font-weight: 600;
     text-shadow: 2px 2px 2px white
 }
 
+li {
+   list-style: none; 
+}
+
 textarea {
-    margin: 10px auto;
+    margin: 10px auto 0px;
     border-style: groove;
+    border-width: thick;
     border-radius: 8px;
     float: left;
 }
 
 input[type=submit] {
     border-style: groove;
-    margin: 15px 0px 0px 10px;
+    margin: 15px 0px 10px 10px;
     border-radius: 5px;
-    background-color: #10C716;
+    background-color: #0E871A;
     color: white;
     font-weight: 700;
 }
 
 .firstMessage, .replyMessage {
-    margin: 0 auto;
+    margin: 15px auto;
     width: 60%;
 }
 
@@ -38,8 +42,70 @@ input[type=submit] {
 }
 
 .firstMessage textarea {
-   border-color: #665e52;  
+   border-color: #3F4BEA;  
 }
 .replyMessage textarea {
-   border-color: #b2a48f;
+   border-color: #FAA653;
 }
+
+.likes {
+    display: inline-block;
+    float: left; 
+    width: 100%;
+    max-height: 30px;
+}
+
+button .thumb, button .dislike-thumb {
+    height: 20px;
+    width: 19px; 
+}
+
+button {
+    background-color: #baf2b5;
+    border: none;
+}
+
+.like-counter, .dislike-counter, .comment, .delete {
+    display: inline-block;
+    font-size: .75rem;
+    vertical-align: super;
+    color: #0E871A;
+    font-weight: 700;
+    margin-right: 15px;
+}
+
+.dislike-thumb {
+    transform: rotate(180deg);
+}
+
+@media screen and (max-width: 480px) {
+    body {
+        width: 95%;
+        margin: 5px;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    ul {
+        width: 100%;
+        padding: 0px;
+        margin-left: 30px;
+    }
+    li {
+       margin: 10px; 
+       padding-right: -20px;        
+    }
+    .firstMessage, .replyMessage {
+        margin: 15px auto;
+        width: 100%;
+    }
+    textarea {
+        width: 230px;
+    }
+    .replyMessage {
+        float: none;
+        margin-left: -25px;
+    }
+}
+
+
