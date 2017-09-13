@@ -11,6 +11,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = data;
+        
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -30,37 +31,45 @@ class App extends Component {
     //This one should store the value into my object as state
     handleSubmit(event){
         event.preventDefault();
-        let firstMessage = Object.assign({}, this.state.firstMessage);
-        
-        this.setState({
-            firstMessage : firstMessage
-        });
-        console.log(firstMessage.comment);
+        let messageInput = this.state.firstMessage.slice();
+        console.log(messageInput);
+         
     }
-    
       
-//when the 'like' button is clicked, edit the CSS to change the color of the background
     
-  render() {
-    return (
-      <div className="App">
-        <h1>Facebook Messenger App</h1>
-        <div className="firstMessage">
-            <FirstMessage
-                firstMessage={this.firstMessage}
-                handleChange={this.handleChange}
-                handleSubmit={this.handleSubmit}
-            />
-            <FirstMessageActions
-                firstMessage={this.firstMessage} 
-            />
-        </div>
-        <ul>
-            <Reply />
-        </ul>
-      </div>
-    );
-  }
+    //when the 'like' button is clicked, edit the CSS to change the color of the background
+
+      render() {
+
+//        let firstMessageToPost = this.state.firstMessage.comment.map(function(index){
+//            return (    
+//                <FirstMessageActions
+//                    firstMessage={this.firstMessage}
+//                    key={this.index}
+//                />
+//            );
+//        }, this);
+
+        return (
+          <div className="App">
+            <h1>Facebook Messenger App</h1>
+            <div className="firstMessage">
+                <FirstMessage
+                    firstMessage={this.firstMessage}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                />
+                <FirstMessageActions 
+                   handleSubmit={this.handleSubmit} 
+                />
+
+            </div>
+            <ul>
+                <Reply />
+            </ul>
+          </div>
+        );
+      }
 }
 
 export default App;

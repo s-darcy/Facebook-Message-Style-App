@@ -11,7 +11,7 @@ class FirstMessage extends Component {
                     <textarea rows="3" cols="50"
 //                    autofocus="autofocus" 
                     placeholder="What's on your mind?"
-                    onChange={this.props.handleChange}
+                    onBlur={this.props.handleChange}
                     value={this.props.firstMessage}
                     type="text">
                     </textarea>
