@@ -1,5 +1,6 @@
 
 import React, {Component} from 'react';
+import data from './data';
 
 class FirstMessageActions extends Component {
     
@@ -8,7 +9,7 @@ class FirstMessageActions extends Component {
         return (
             <div className="likes">
                 <div>
-                    <p className="postedComment">Here is where the typed text posts</p>
+                    <p className="postedComment">{this.props.firstMessage}</p>
                 </div>
                 <div className="actionButtons">
                     <button><img className="thumb" src={require('./thumb_up.png')} /></button>
