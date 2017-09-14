@@ -1,18 +1,20 @@
 const data = {
-    "message" : {
-        "firstMessage" : {
+    "message" : [
+        {"firstMessage" : {
             "comment" : [],
             "likeCount" : 0,
             "dislikeCount" : 0,
             "delete" : ''
+            }
         },
-        "replies": {
-            "reply" : [],
+        {"replies": {
+            "comment" : [],
             "likeCount" : [],
             "dislikeCount" : 0,
             "delete" : '' 
+            }
         }
-    },
+    ],
     "totalMessages": 0 
  };
  

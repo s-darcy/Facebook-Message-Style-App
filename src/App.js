@@ -36,24 +36,18 @@ class App extends Component {
         let newLikeCount = message.firstMessage.likeCount + 1;
         
         message.firstMessage.likeCount = newLikeCount;
-        
-        console.log(newLikeCount);
 
-        
         this.setState({
             message : newLikeCount
         });
-                
-        console.log(newLikeCount);
-        console.log(message );
+        console.log(message);
     }
     
     
     //This one should store the value into my object as state
     handleSubmit(event){
         event.preventDefault();
-        let message = Object.assign({}, this.state.message);
-        message.firstMessage.comment = '';
+        let message = this.state.message.slice();
         
         this.setState({
             message : message
@@ -63,7 +57,17 @@ class App extends Component {
     //when the 'like' button is clicked, edit the CSS to change the color of the background
 
       render() {
-          
+          console.log(Array.isArray (this.state.message));
+          console.log(this.state.message);
+          let original = this.state.message.map(function(comment, likes){
+              <FirstMessageActions 
+                   comment={comment}
+                   likes={likes}    
+                   handleSubmit={this.handleSubmit}
+                   message={this.message}
+                   handleLikeCount = {this.handleLikeCount}    
+                />
+          }, this);
           
         return (
           <div className="App">
@@ -77,13 +81,9 @@ class App extends Component {
                 />
                 <div>
                     <p className="postedComment">{}</p>
+                    {original}
                 </div>
-                    <FirstMessageActions 
-                       firstMessage={this.firstMessage}
-                       handleSubmit={this.handleSubmit}
-                       message={this.state.message}
-                       handleLikeCount = {this.handleLikeCount}    
-                    />
+
             </div>
             <ul>
                 <Reply />
