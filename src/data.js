@@ -8,7 +8,7 @@ const data = {
         },
         "replies": {
             "reply" : [],
-            "likeCount" : 0,
+            "likeCount" : [],
             "dislikeCount" : 0,
             "delete" : '' 
         }

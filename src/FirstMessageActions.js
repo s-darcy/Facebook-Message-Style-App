@@ -9,8 +9,9 @@ class FirstMessageActions extends Component {
       
         return (
             <div className="likes">
+                <p>{this.props.message.firstMessage.comment}</p>
                 <div className="actionButtons">
-                    <button><img className="thumb" src={require('./thumb_up.png')} /></button>
+                    <button onClick={(event) => this.props.handleLikeCount(event)}><img className="thumb" src={require('./thumb_up.png')} /></button>
                     <p className="like-counter">13</p>
                     <button><img className="dislike-thumb" src={require('./thumb_up.png')} /></button>
                     <p className="dislike-counter">6</p>

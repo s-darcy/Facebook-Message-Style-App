@@ -14,6 +14,7 @@ class App extends Component {
         
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleLikeCount = this.handleLikeCount.bind(this);
     }
     
     //This one shows the letters as they are being typed
@@ -28,23 +29,41 @@ class App extends Component {
         console.log(message);
     }
     
-
-    //This one should store the value into my object as state
-    handleSubmit(event){
+    handleLikeCount (event) {
         event.preventDefault();
-        let messageInput = this.state.message.firstMessage.slice();
-        console.log(messageInput);
+        let message = Object.assign({}, this.state.message);
+        
+        let newLikeCount = message.firstMessage.likeCount + 1;
+        
+        message.firstMessage.likeCount = newLikeCount;
+        
+        console.log(newLikeCount);
+
+        
         this.setState({
-            firstMessage : messageInput
-        }); 
+            message : newLikeCount
+        });
+                
+        console.log(newLikeCount);
+        console.log(message );
     }
     
     
-      
-    
+    //This one should store the value into my object as state
+    handleSubmit(event){
+        event.preventDefault();
+        let message = Object.assign({}, this.state.message);
+        message.firstMessage.comment = '';
+        
+        this.setState({
+            message : message
+        }); 
+    }
+
     //when the 'like' button is clicked, edit the CSS to change the color of the background
 
       render() {
+          
           
         return (
           <div className="App">
@@ -54,15 +73,17 @@ class App extends Component {
                     message={this.message}
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit}
+                    handleCount={this.handleCount}
                 />
                 <div>
                     <p className="postedComment">{}</p>
                 </div>
-                <FirstMessageActions 
-                   firstMessage={this.firstMessage}
-                   handleSubmit={this.handleSubmit}
-                />
-
+                    <FirstMessageActions 
+                       firstMessage={this.firstMessage}
+                       handleSubmit={this.handleSubmit}
+                       message={this.state.message}
+                       handleLikeCount = {this.handleLikeCount}    
+                    />
             </div>
             <ul>
                 <Reply />
