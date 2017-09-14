@@ -19,48 +19,48 @@ class App extends Component {
     //This one shows the letters as they are being typed
     handleChange(event) {
         const newPost = event.target.value;
-        let firstMessage = Object.assign({}, this.state.firstMessage);
-        firstMessage.comment = newPost;
+        let message = Object.assign({}, this.state.message);
+        message.firstMessage.comment = newPost;
         
         this.setState({
-            firstMessage : newPost
+            message : newPost
         });
-        console.log(firstMessage);
+        console.log(message);
     }
     
+
     //This one should store the value into my object as state
     handleSubmit(event){
         event.preventDefault();
-        let messageInput = this.state.firstMessage.slice();
+        let messageInput = this.state.message.firstMessage.slice();
         console.log(messageInput);
-         
+        this.setState({
+            firstMessage : messageInput
+        }); 
     }
+    
+    
       
     
     //when the 'like' button is clicked, edit the CSS to change the color of the background
 
       render() {
-
-//        let firstMessageToPost = this.state.firstMessage.comment.map(function(index){
-//            return (    
-//                <FirstMessageActions
-//                    firstMessage={this.firstMessage}
-//                    key={this.index}
-//                />
-//            );
-//        }, this);
-
+          
         return (
           <div className="App">
             <h1>Facebook Messenger App</h1>
             <div className="firstMessage">
                 <FirstMessage
-                    firstMessage={this.firstMessage}
+                    message={this.message}
                     handleChange={this.handleChange}
                     handleSubmit={this.handleSubmit}
                 />
+                <div>
+                    <p className="postedComment">{}</p>
+                </div>
                 <FirstMessageActions 
-                   handleSubmit={this.handleSubmit} 
+                   firstMessage={this.firstMessage}
+                   handleSubmit={this.handleSubmit}
                 />
 
             </div>

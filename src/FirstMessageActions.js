@@ -1,6 +1,7 @@
 
 import React, {Component} from 'react';
 import data from './data';
+import FirstMessage from './FirstMessage';
 
 class FirstMessageActions extends Component {
     
@@ -8,9 +9,6 @@ class FirstMessageActions extends Component {
       
         return (
             <div className="likes">
-                <div>
-                    <p className="postedComment">{this.props.firstMessage}</p>
-                </div>
                 <div className="actionButtons">
                     <button><img className="thumb" src={require('./thumb_up.png')} /></button>
                     <p className="like-counter">13</p>
