@@ -8,15 +8,14 @@ class FirstMessage extends Component {
 
         return (
             <div>
-                <form onSubmit={(event) => this.props.handleSubmit(event)} >
+                <form onSubmit={(event) => this.props.handleSubmit(this.props.text, event)} >
                     <textarea rows="3" cols="50"
                         placeholder="What's on your mind?"
                         onBlur={this.props.handleChange, this.props.handleCount}
-                        
-                        value={this.props.message}
                         type="text">
                     </textarea>
                     <input type="submit" value="Submit" />
+    
                 </form>
             </div>
         );

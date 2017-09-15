@@ -19,69 +19,85 @@ class App extends Component {
     
     //This one shows the letters as they are being typed
     handleChange(event) {
+        event.preventDefault();
         const newPost = event.target.value;
-        let message = Object.assign({}, this.state.message);
-        message.firstMessage.comment = newPost;
+        let firstComment=  this.state.firstComment.slice();
+        firstComment.text = newPost;
+        console.log(newPost);
         
         this.setState({
-            message : newPost
+            firstComment : newPost
         });
-        console.log(message);
+        console.log(firstComment);
     }
     
     handleLikeCount (event) {
         event.preventDefault();
-        let message = Object.assign({}, this.state.message);
+        let actionButtons = Object.assign({}, this.state.actionButtons);
         
-        let newLikeCount = message.firstMessage.likeCount + 1;
-        
-        message.firstMessage.likeCount = newLikeCount;
+        let newLikeCount = actionButtons.likeCount + 1;
+        actionButtons.likeCount = newLikeCount;
 
         this.setState({
-            message : newLikeCount
+            actionButtons : newLikeCount
         });
-        console.log(message);
+        console.log(newLikeCount);
     }
     
     
     //This one should store the value into my object as state
-    handleSubmit(event){
+    handleSubmit(text, event){
         event.preventDefault();
-        let message = this.state.message.slice();
+        let firstComment = this.state.firstComment.filter(function(text){
+            if (text !== ''){
+                return text;
+            }
+        });
         
         this.setState({
-            message : message
+            firstComment : firstComment
         }); 
     }
 
     //when the 'like' button is clicked, edit the CSS to change the color of the background
 
       render() {
-          console.log(Array.isArray (this.state.message));
-          console.log(this.state.message);
-          let original = this.state.message.map(function(comment, likes){
-              <FirstMessageActions 
-                   comment={comment}
-                   likes={likes}    
-                   handleSubmit={this.handleSubmit}
-                   message={this.message}
-                   handleLikeCount = {this.handleLikeCount}    
-                />
-          }, this);
+          
+          console.log(Array.isArray (this.state.firstComment));
+          console.log(this.state);
+          
+            let originalMessage = this.state.firstComment.map(function(text, index){
+                return (
+                  <FirstMessage
+                      text={text}
+                      index={index}
+                      handleChange={this.handleChange}
+                      handleSubmit={this.handleSubmit}
+                      handleCount={this.handleCount}
+                   />
+                  );
+              }, this);    
+                  
+            let originalMessageActions = this.state.actionButtons.map(function(comment, likes){
+                return (          
+                  <FirstMessageActions 
+                       comment={comment}
+                       likes={likes}    
+                       handleSubmit={this.handleSubmit}
+                       message={this.message}
+                       handleLikeCount = {this.handleLikeCount} 
+                    /> 
+                 );
+              }, this);
           
         return (
           <div className="App">
             <h1>Facebook Messenger App</h1>
             <div className="firstMessage">
-                <FirstMessage
-                    message={this.message}
-                    handleChange={this.handleChange}
-                    handleSubmit={this.handleSubmit}
-                    handleCount={this.handleCount}
-                />
+            
                 <div>
-                    <p className="postedComment">{}</p>
-                    {original}
+                    {originalMessage}
+                    {originalMessageActions}
                 </div>
 
             </div>

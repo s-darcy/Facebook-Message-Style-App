@@ -1,19 +1,21 @@
 const data = {
-    "message" : [
-        {"firstMessage" : {
-            "comment" : [],
-            "likeCount" : 0,
-            "dislikeCount" : 0,
-            "delete" : ''
-            }
-        },
-        {"replies": {
-            "comment" : [],
-            "likeCount" : [],
-            "dislikeCount" : 0,
-            "delete" : '' 
-            }
-        }
+    "firstComment" : [
+        {"text": '', 
+        "index" : 0 }
+    ],
+    "actionButtons" : [
+        {"likeCount" : 0},
+        {"dislikeCount" : 0},
+        {"delete" : ''}
+    ],
+    "reply" : [
+        {"text": '', 
+        "index" : 0}
+    ],
+    "replyButtons" : [
+        {"likeCount" : 0},
+        {"dislikeCount" : 0},
+        {"delete" : ''} 
     ],
     "totalMessages": 0 
  };
