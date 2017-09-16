@@ -1,23 +1,21 @@
 const data = {
     "firstComment" : [
-        {"text": '', 
-        "index" : 0 }
-    ],
-    "actionButtons" : [
-        {"likeCount" : 0},
-        {"dislikeCount" : 0},
-        {"delete" : ''}
-    ],
-    "reply" : [
-        {"text": '', 
-        "index" : 0}
-    ],
-    "replyButtons" : [
-        {"likeCount" : 0},
-        {"dislikeCount" : 0},
-        {"delete" : ''} 
+        {
+            "text": '',
+            "submitted": false,
+            "likes": 0,
+            "dislikes": 0,
+            "replies": [
+                {
+                "text": '',
+                "submitted": false,
+                "likes": 0,
+                "dislikes": 0,
+                }
+            ],
+        }
     ],
     "totalMessages": 0 
- };
+};
  
  export default data;

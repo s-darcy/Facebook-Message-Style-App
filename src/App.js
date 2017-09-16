@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import data from './data';
 import FirstMessage from './FirstMessage';
-import FirstMessageActions from './FirstMessageActions';
-import Reply from './Reply';
-import ReplyAction from './ReplyAction';
 
 class App extends Component {
     
@@ -12,28 +9,43 @@ class App extends Component {
         super();
         this.state = data;
         
-        this.handleChange = this.handleChange.bind(this);
+//        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleLikeCount = this.handleLikeCount.bind(this);
+        this.handleFirstCommentUpdate = this.handleFirstCommentUpdate.bind(this);
     }
     
     //This one shows the letters as they are being typed
-    handleChange(event) {
-        event.preventDefault();
-        const newPost = event.target.value;
-        let firstComment=  this.state.firstComment.slice();
-        firstComment.text = newPost;
-        console.log(newPost);
+    // This functions job is to update the text property for this comment.
+    handleFirstCommentUpdate(event, index) {
+        let commentObj = Object.assign({}, this.state.firstComment[index]);
+        commentObj.text = event.target.value;
+        
+        let modifiedFirstComment = this.state.firstComment.slice();
+        modifiedFirstComment[index] = commentObj;
         
         this.setState({
-            firstComment : newPost
+            firstComment: modifiedFirstComment
         });
-        console.log(firstComment);
+    }
+
+    //This one should store the value into my object as state
+    // This functions job is to lock the textarea by switching submitted to true.
+    handleSubmit(event, text){
+        event.preventDefault();
+        let firstComment = this.state.firstComment.slice();
+        
+        
+        firstComment.push({ text });
+        this.setState({
+            firstComment : firstComment
+        }); 
     }
     
+        
     handleLikeCount (event) {
         event.preventDefault();
-        let actionButtons = Object.assign({}, this.state.actionButtons);
+        let actionButtons = this.state.actionButtons.slice();
         
         let newLikeCount = actionButtons.likeCount + 1;
         actionButtons.likeCount = newLikeCount;
@@ -41,54 +53,29 @@ class App extends Component {
         this.setState({
             actionButtons : newLikeCount
         });
-        console.log(newLikeCount);
-    }
-    
-    
-    //This one should store the value into my object as state
-    handleSubmit(text, event){
-        event.preventDefault();
-        let firstComment = this.state.firstComment.filter(function(text){
-            if (text !== ''){
-                return text;
-            }
-        });
-        
-        this.setState({
-            firstComment : firstComment
-        }); 
+//        console.log(newLikeCount);
     }
 
     //when the 'like' button is clicked, edit the CSS to change the color of the background
 
       render() {
           
-          console.log(Array.isArray (this.state.firstComment));
-          console.log(this.state);
+//          console.log(Array.isArray (this.state.firstComment));
+//          console.log(Array.isArray (this.state.actionButtons));
+//          console.log(this.state);
           
-            let originalMessage = this.state.firstComment.map(function(text, index){
+            let originalMessage = this.state.firstComment.map(function(obj, index){
                 return (
                   <FirstMessage
-                      text={text}
+                      data={obj}
                       index={index}
-                      handleChange={this.handleChange}
+                      handleChange={this.handleFirstCommentUpdate}
                       handleSubmit={this.handleSubmit}
-                      handleCount={this.handleCount}
+                      handleLikeCount={this.handleLikeCount}
                    />
                   );
               }, this);    
                   
-            let originalMessageActions = this.state.actionButtons.map(function(comment, likes){
-                return (          
-                  <FirstMessageActions 
-                       comment={comment}
-                       likes={likes}    
-                       handleSubmit={this.handleSubmit}
-                       message={this.message}
-                       handleLikeCount = {this.handleLikeCount} 
-                    /> 
-                 );
-              }, this);
           
         return (
           <div className="App">
@@ -97,13 +84,9 @@ class App extends Component {
             
                 <div>
                     {originalMessage}
-                    {originalMessageActions}
                 </div>
 
             </div>
-            <ul>
-                <Reply />
-            </ul>
           </div>
         );
       }
