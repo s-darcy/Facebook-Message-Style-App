@@ -13,6 +13,8 @@ class App extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleLikeCount = this.handleLikeCount.bind(this);
         this.handleFirstCommentUpdate = this.handleFirstCommentUpdate.bind(this);
+        this.updateSubmittedProp = this.updateSubmittedProp.bind(this);
+        
     }
     
     //This one shows the letters as they are being typed
@@ -29,20 +31,32 @@ class App extends Component {
         });
     }
 
-    //This one should store the value into my object as state
+
     // This functions job is to lock the textarea by switching submitted to true.
     handleSubmit(event, text){
+        console.log(firstComment.text);
         event.preventDefault();
         let firstComment = this.state.firstComment.slice();
         
-        
         firstComment.push({ text });
+        
         this.setState({
             firstComment : firstComment
         }); 
     }
     
+    updateSubmittedProp (event) {
+        event.preventDefault();
+        let updateSubmitted = this.state.firstComment.slice();
         
+        updateSubmitted.submitted = true;
+        
+        console.log(updateSubmitted);
+        this.setState({
+            firstComment : updateSubmitted
+        }); 
+    }
+       
     handleLikeCount (event) {
         event.preventDefault();
         let actionButtons = this.state.actionButtons.slice();
@@ -56,6 +70,24 @@ class App extends Component {
 //        console.log(newLikeCount);
     }
 
+//    
+//        "firstComment" : [
+//        {
+//            "text": '',
+//            "submitted": false,
+//            "likes": 0,
+//            "dislikes": 0,
+//            "replies": [
+//                {
+//                "text": '',
+//                "submitted": false,
+//                "likes": 0,
+//                "dislikes": 0,
+//                }
+//            ],
+//        }
+//    ],
+    
     //when the 'like' button is clicked, edit the CSS to change the color of the background
 
       render() {
@@ -72,6 +104,7 @@ class App extends Component {
                       handleChange={this.handleFirstCommentUpdate}
                       handleSubmit={this.handleSubmit}
                       handleLikeCount={this.handleLikeCount}
+                      updateSubmittedProp={this.updateSubmittedProp}    
                    />
                   );
               }, this);    

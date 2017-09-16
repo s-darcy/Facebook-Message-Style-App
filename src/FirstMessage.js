@@ -7,12 +7,23 @@ class FirstMessage extends Component {
         super();
         
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmitHelper = this.handleSubmitHelper.bind(this);
+        
     }
     
     handleChange(event) {
         event.preventDefault();
         this.props.handleChange(event, this.props.index);
     }
+    
+    handleSubmitHelper(event) {
+        event.preventDefault();
+        this.props.handleSubmit(event, this.props.text);
+    }
+    
+//USE THE .splice() inorder to Delete!!!
+    
+    
     
 //                    return (          
 //                  <FirstMessageActions 
@@ -27,7 +38,8 @@ class FirstMessage extends Component {
         console.log(this.props.index);
         return (
             <div>
-                <form onSubmit={(event) => this.props.handleSubmit(this.props.text, event)} >
+                <form onSubmit={(event) => this.props.handleSubmit, this.props.updateSubmittedProp} >
+                
                     <textarea rows="3" cols="50" 
                         disabled={this.props.data.submitted}
                         placeholder="What's on your mind?"
@@ -36,7 +48,7 @@ class FirstMessage extends Component {
                         value={this.props.data.text}/>
                     <input type="submit" value="Submit" />
                 </form>
-                    {this.props.data.submitted && <div className="actionButtons">
+                {this.props.data.submitted && <div className="actionButtons">
                     <button onClick={() => {}}><img className="thumb" src={require('./thumb_up.png')} /></button>
                     <p className="like-counter"></p>
                     <button><img className="dislike-thumb" src={require('./thumb_up.png')} /></button>
@@ -44,18 +56,6 @@ class FirstMessage extends Component {
                     <button className="comment">comment</button>
                     <button className="delete">delete</button>
                 </div>}
-
-                {this.props.data.submitted && <div className="likes">
-                    <div className="actionButtons">
-                        <button onClick={(event) => this.props.handleLikeCount}><img className="thumb" src={require('./thumb_up.png')} /></button>
-                        <p className="like-counter">{}</p>
-                        <button><img className="dislike-thumb" src={require('./thumb_up.png')} /></button>
-                        <p className="dislike-counter">6</p>
-                        <button className="comment">comment</button>
-                        <button className="delete">delete</button>
-                    </div>
-                </div>}
-
             </div>
         );
     }  
